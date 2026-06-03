@@ -1,0 +1,49 @@
+# FastAPI
+fastapi
+uvicorn[standard]
+
+# Database
+sqlalchemy
+psycopg2-binary
+alembic
+
+# Pydantic Settings
+pydantic
+pydantic-settings
+
+# Authentication
+python-jose[cryptography]
+passlib[bcrypt]
+bcrypt
+
+# Environment Variables
+python-dotenv
+
+# OpenAI
+openai
+
+# LangChain
+langchain
+langchain-openai
+langchain-community
+
+# Vector Database (Choose one)
+chromadb
+# faiss-cpu
+
+# Document Processing (for RAG)
+pypdf
+python-docx
+
+# File Uploads
+python-multipart
+
+# HTTP Requests
+httpx
+
+# Testing
+pytest
+pytest-asyncio
+
+# Optional Logging
+loguru
