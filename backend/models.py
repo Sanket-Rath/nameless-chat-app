@@ -7,7 +7,7 @@ from sqlalchemy import DateTime
 
 from sqlalchemy.sql import func
 
-from database import Base
+from backend.database import Base
 
 
 class User(Base):
@@ -55,8 +55,6 @@ class Message(Base):
         ForeignKey("conversations.id")
     )
 
-    role = Column(String(20))
-
     content = Column(Text)
 
     created_at = Column(
@@ -73,6 +71,12 @@ class Document(Base):
     user_id = Column(
         BigInteger,
         ForeignKey("users.id")
+    )
+
+    conversation_id = Column(
+        BigInteger,
+        ForeignKey("conversations.id"),
+        nullable=True
     )
 
     file_name = Column(String(255))

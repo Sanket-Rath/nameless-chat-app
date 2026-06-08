@@ -1,19 +1,24 @@
-import openai
+import google.generativeai as genai
 
-from config import OPENAI_API_KEY
+from backend.config import GEMINI_API_KEY
 
-openai.api_key = OPENAI_API_KEY
+genai.configure(api_key=GEMINI_API_KEY)
+
+model = genai.GenerativeModel(
+    "gemini-2.5-flash",
+    system_instruction="You are a helpful assistant.",
+)
 
 
 def generate_response(message: str) -> str:
-    completion_client = getattr(openai, "Completion", None)
-    if completion_client is None:
-        raise RuntimeError("OpenAI Completion client is unavailable")
-
-    response = completion_client.create(
-        model="text-davinci-003",
-        prompt=message,
-        max_tokens=150,
-        temperature=0.8
-    )
-    return response.choices[0].text.strip()
+    try:
+        response = model.generate_content(
+            message,
+            generation_config=genai.GenerationConfig(
+                max_output_tokens=2000,
+                temperature=0.8,
+            ),
+        )
+        return response.text.strip()
+    except Exception as e:
+        return f"Sorry, I encountered an error: {str(e)}"

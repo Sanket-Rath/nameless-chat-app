@@ -1,49 +1,33 @@
 # FastAPI
 fastapi
 uvicorn[standard]
+python-multipart
 
 # Database
 sqlalchemy
 psycopg2-binary
 alembic
 
-# Pydantic Settings
+# Validation
 pydantic
-pydantic-settings
+python-dotenv
 
 # Authentication
 python-jose[cryptography]
 passlib[bcrypt]
 bcrypt
 
-# Environment Variables
-python-dotenv
+# Gemini integration
+google-generativeai
 
-# OpenAI
-openai
-
-# LangChain
-langchain
-langchain-openai
-langchain-community
-
-# Vector Database (Choose one)
-chromadb
-# faiss-cpu
-
-# Document Processing (for RAG)
+# RAG
+faiss-cpu
+numpy
 pypdf
-python-docx
-
-# File Uploads
-python-multipart
-
-# HTTP Requests
-httpx
 
 # Testing
 pytest
 pytest-asyncio
 
-# Optional Logging
+# Optional logging
 loguru

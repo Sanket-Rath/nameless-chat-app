@@ -1,35 +1,34 @@
 from jose import jwt
 from jose import JWTError
 
-from passlib.context import CryptContext
+import bcrypt
+import hashlib
 
 from datetime import datetime
 from datetime import timedelta
 
-from config import SECRET_KEY
-from config import ALGORITHM
+from backend.config import SECRET_KEY
+from backend.config import ALGORITHM
 
 if SECRET_KEY is None:
     raise ValueError("SECRET_KEY environment variable must be set")
 
-pwd_context = CryptContext(
-    schemes=["bcrypt"],
-    deprecated="auto"
-)
-
 
 def hash_password(password):
-    return pwd_context.hash(password)
+    # Hash with SHA256 first, then bcrypt
+    sha256_hash = hashlib.sha256(password.encode()).hexdigest()
+    salt = bcrypt.gensalt()
+    hashed = bcrypt.hashpw(sha256_hash.encode(), salt)
+    return hashed.decode()
 
 
 def verify_password(
     plain_password,
     hashed_password
 ):
-    return pwd_context.verify(
-        plain_password,
-        hashed_password
-    )
+    # Hash plain password same way
+    sha256_hash = hashlib.sha256(plain_password.encode()).hexdigest()
+    return bcrypt.checkpw(sha256_hash.encode(), hashed_password.encode())
 
 
 def create_access_token(data):

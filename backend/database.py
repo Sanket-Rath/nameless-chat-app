@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import declarative_base
 
-from config import DATABASE_URL
+from backend.config import DATABASE_URL
 
 if DATABASE_URL is None:
     raise ValueError("DATABASE_URL environment variable must be set")
